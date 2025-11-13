@@ -11,7 +11,14 @@ with open(".version") as f:
     version = f.read().strip()
 
 def get_local_version():
-    return version
+    if version == "":
+        return "-"
+    else:
+        return version
+    
+BOT_PATH = "/home/memz/Babybot-Blaze"
+UPDATE_SCRIPT = f"{BOT_PATH}/update_bot.sh"
+VERSION_FILE = f"{BOT_PATH}/.version"
 
 def get_remote_version():
     resp = requests.get(REPO_API)
@@ -91,10 +98,16 @@ class StatusCog(commands.Cog):
             )
             await ctx.send(embed=embed)
 
-            result = subprocess.run(
-                ["/home/memz/Babybot-Blaze/update_bot.sh"],
-                    capture_output=True, text=True, check=True
-                )
+            subprocess.run([UPDATE_SCRIPT], check=True)
+
+            # optional: write latest commit hash directly from bot
+            local_hash = subprocess.check_output(
+                ["git", "-C", BOT_PATH, "rev-parse", "--short", "HEAD"]
+            ).decode().strip()
+            with open(VERSION_FILE, "w") as f:
+                f.write(local_hash)
+
+            await ctx.send(f"Update done! Current version: `v{local_hash}`")
                 
             
             

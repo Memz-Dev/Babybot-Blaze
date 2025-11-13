@@ -13,7 +13,7 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-worhtless_value_to_update = 2
+worhtless_value_to_update = 3
 
 async def main():
     # await load_extension because load_extension is coroutine in modern discord.py
