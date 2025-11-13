@@ -18,7 +18,8 @@ async def main():
     await bot.load_extension("cogs.slopManagment")
     await bot.load_extension("cogs.general")
     await bot.load_extension("cogs.autoresponse")
-    print("Live")
+    await bot.load_extension("cogs.botstatus")
+    print("Starting bot")
     
     # use start() instead of run()
     await bot.start(TOKEN)
