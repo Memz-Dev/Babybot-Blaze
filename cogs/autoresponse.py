@@ -15,6 +15,7 @@ class ResponseCog(commands.Cog):
                 "latinx" : "<@852600131932651551>",
 
                 "w reza":"https://cdn.discordapp.com/attachments/1266031817602109563/1420160193676841091/99E83BBA-0FD3-42EB-BC94-794CA8DC24A1-ezgif.com-video-to-gif-converter.gif?ex=69179f3f&is=69164dbf&hm=b7154e51cba7a616c56e3121710e9f13714df7c130b43992ad4418f1a35e3a2d&",
+                "ms2k" : "https://tenor.com/view/martinsugar2k-gif-5932750616034456338"
             }
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
