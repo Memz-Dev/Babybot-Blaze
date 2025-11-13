@@ -97,7 +97,13 @@ class StatusCog(commands.Cog):
             )
             await ctx.send(embed=embed)
 
-            subprocess.run([UPDATE_SCRIPT])
+            subprocess.run(
+                [UPDATE_SCRIPT],
+                check=True,
+                capture_output=True,
+                text=True,
+                env={"HOME": "/home/memz", **os.environ} 
+            )
             await ctx.send(f"update complete!\nNew version: {get_local_version()}\nRestarting...")
             subprocess.run([RESTART_SCRIPT])
                 
