@@ -50,7 +50,7 @@ class StatusCog(commands.Cog):
             if local == remote:
                 embed = discord.Embed(
                     title="Running online",
-                    description=f"Version: {local} (Latest)",
+                    description=f"Version: `{local}` (Latest)",
                     color=0x00FF00
                 )
                 await ctx.send(embed=embed)
@@ -59,7 +59,7 @@ class StatusCog(commands.Cog):
             if local == "dev-000":
                 embed = discord.Embed(
                     title="Running locally",
-                    description=f"Latest: {remote}",
+                    description=f"Latest: `{remote}`",
                     color=0x00FF00
                 )
                 await ctx.send(embed = embed)
@@ -67,7 +67,7 @@ class StatusCog(commands.Cog):
 
             embed = discord.Embed(
                     title="Running online",
-                    description=f"Version: {local} (Behind)\nLatest: {remote}",
+                    description=f"Version: `{local}` (Behind)\nLatest: `{remote}`",
                     color=0x00FF00
                 )
             await ctx.send(embed=embed)
@@ -90,16 +90,17 @@ class StatusCog(commands.Cog):
                 await ctx.send("already on latest version bitch")
                 return
 
+            await ctx.send(f"Updating to `{remote}`")
+
+            output = subprocess.getoutput(UPDATE_SCRIPT)
             embed = discord.Embed(
-                title="Updating",
-                description=f"Updating to `v{remote}`",
+                title="Update complete!",
+                description=f"New version: `{remote}`\nRestarting...",
                 color=0x00FF00
             )
             await ctx.send(embed=embed)
-
-            await ctx.send(subprocess.getoutput(UPDATE_SCRIPT))
-            #await ctx.send(f"update complete!\nNew version: {get_local_version()}\nRestarting...")
-            await ctx.send(subprocess.getoutput(RESTART_SCRIPT))
+            restartOutput = subprocess.getoutput(RESTART_SCRIPT)
+            
                 
             
             
