@@ -15,8 +15,8 @@ def get_local_version():
     return version
     
 BOT_PATH = "/home/memz/Babybot-Blaze"
-UPDATE_SCRIPT = f"{BOT_PATH}/update_bot.sh"
-RESTART_SCRIPT = f"{BOT_PATH}/restart.sh"
+UPDATE_SCRIPT = f"sudo {BOT_PATH}/update_bot.sh"
+RESTART_SCRIPT = f"sudo {BOT_PATH}/restart.sh"
 VERSION_FILE = f"{BOT_PATH}/.version"
 
 def get_remote_version():
