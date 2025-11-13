@@ -80,4 +80,6 @@ async def unslop_member(ctx,member):
             await ctx.send(NO_PERMISSIONS)
     except Exception as e:
             await ctx.send(f"{ERROR_MESSAGE}: {e}")  
+
+
     

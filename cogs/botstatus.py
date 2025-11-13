@@ -7,17 +7,16 @@ import subprocess
 Sigma_ID = 524292628171325442
 REPO_API = "https://api.github.com/repos/memz-dev/babybot-blaze/branches/main"
 
-with open(".version") as f:
-    version = f.read().strip()
+version = "-"
 
 def get_local_version():
-    if version == "":
-        return "-"
-    else:
-        return version
+    with open(".version") as f:
+        version = f.read().strip()
+    return version
     
 BOT_PATH = "/home/memz/Babybot-Blaze"
 UPDATE_SCRIPT = f"{BOT_PATH}/update_bot.sh"
+RESTART_SCRIPT = f"{BOT_PATH}/restart.sh"
 VERSION_FILE = f"{BOT_PATH}/.version"
 
 def get_remote_version():
@@ -98,16 +97,9 @@ class StatusCog(commands.Cog):
             )
             await ctx.send(embed=embed)
 
-            subprocess.run([UPDATE_SCRIPT], check=True)
-
-            # optional: write latest commit hash directly from bot
-            local_hash = subprocess.check_output(
-                ["git", "-C", BOT_PATH, "rev-parse", "--short", "HEAD"]
-            ).decode().strip()
-            with open(VERSION_FILE, "w") as f:
-                f.write(local_hash)
-
-            await ctx.send(f"Update done! Current version: `v{local_hash}`")
+            subprocess.run([UPDATE_SCRIPT])
+            await ctx.send(f"update complete!\nNew version: {get_local_version()}\nRestarting...")
+            subprocess.run([RESTART_SCRIPT])
                 
             
             
