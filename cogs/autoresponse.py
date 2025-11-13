@@ -9,7 +9,10 @@ class ResponseCog(commands.Cog):
         self.responses = {
                 "kazuya": "sigma",
                 "asuka": "stupid bitch character",
-                "crashout": "shut mouth"
+                "crashout": "shut mouth",
+                "rofighters": "26 years",
+                "anna" : "honest low tier",
+                "latinx" : "<@852600131932651551>",
             }
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
