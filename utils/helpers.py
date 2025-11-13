@@ -81,5 +81,6 @@ async def unslop_member(ctx,member):
     except Exception as e:
             await ctx.send(f"{ERROR_MESSAGE}: {e}")  
 
-
+def isOwner(memberID):
+      return memberID == 524292628171325442
     

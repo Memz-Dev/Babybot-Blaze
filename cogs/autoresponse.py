@@ -41,6 +41,23 @@ class ResponseCog(commands.Cog):
                 await message.reply(reply,mention_author=False)
                 break  # respond only once per message
 
+    @commands.command()
+    async def wordlist(self,ctx):
+        if not isOwner(ctx.author.id):
+            return
+        
+        newString = ""
+
+        for word,response in self.responses.items():
+            newString += f"{word}\n"
+
+        embed = discord.Embed(
+                title="Trigger List",
+                description=newString,
+                color=0x00FF00
+            )
+        await ctx.send(embed=embed)
+
 
 async def setup(bot):
     await bot.add_cog(ResponseCog(bot))
