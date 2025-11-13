@@ -74,6 +74,10 @@ class StatusCog(commands.Cog):
 
         @bot.command()
         async def update(ctx):
+            if ctx.author.id != Sigma_ID:
+                await ctx.send("stupid bitch member")
+                return
+            
             local = get_local_version()
 
             if local == "dev-000":
