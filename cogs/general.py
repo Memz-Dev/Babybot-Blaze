@@ -14,6 +14,10 @@ class GeneralCog(commands.Cog):
         
         await ctx.send("!slopmeplease")
 
+    @commands.command()
+    async def album(self, ctx):
+        await ctx.send(get_release(774670))
+
 
 async def setup(bot):
     await bot.add_cog(GeneralCog(bot))

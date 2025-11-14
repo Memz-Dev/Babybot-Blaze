@@ -1,6 +1,7 @@
 import json
 import os
 import discord
+import requests
 
 # ----- Config -----
 slopperRole = 1348641007948005416  # role ID for slop
@@ -89,4 +90,17 @@ async def unslop_member(ctx,member):
 
 def isOwner(memberID):
       return memberID == 524292628171325442
+
+def get_release(id):
+    url = f"https://api.discogs.com/releases/{id}"
+    headers = {
+        #"Authorization": f"Discogs token={DISCOGS_TOKEN}",
+        "User-Agent": "BabyBotBlaze/1.0"
+    }
+
+    resp = requests.get(url, headers=headers)
+    if resp.status_code != 200:
+        return f"Error fetching release: {resp.status_code}"
+
+    return resp.json()
     
