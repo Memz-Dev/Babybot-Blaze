@@ -31,6 +31,12 @@ def has_manage_roles(ctx):
     """Check if the command author can manage roles"""
     return ctx.author.guild_permissions.manage_roles
 
+async def author_is_owner(ctx):
+      if ctx.author.id != 524292628171325442:
+            await ctx.send("stupid bitch member")
+            return True
+      return False
+
 async def quick_check_roleEdit(ctx):
     """Check if the command author can manage roles"""
     
