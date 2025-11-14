@@ -8,7 +8,7 @@ class GeneralCog(commands.Cog):
         setAllowedGuilds(self,{1347246964865105972})
 
     @commands.command()
-    async def commands(self, ctx, member: discord.Member = None):
+    async def listcommands(self, ctx, member: discord.Member = None):
         if not isAllowedInGuild(self,ctx.guild.id): 
             return
         
@@ -16,7 +16,27 @@ class GeneralCog(commands.Cog):
 
     @commands.command()
     async def album(self, ctx):
-        await ctx.send(get_release(774670))
+        
+        result = get_release(get_music_id())
+        
+        embed = discord.Embed(
+                    title=f"Current Album: {result['artists'][0]['name']} - {result['title']}",
+                    description=f"Year: {result['year']}\nGenre: {', '.join(result['genres'])}\nStyles: {', '.join(result['styles'])}",
+                    color=0x00FF00
+                )
+        embed.set_thumbnail(url=result['images'][0]['uri'])
+        embed.add_field(name="Notes", value=get_music_description(), inline=False)
+        embed.add_field(name="Tracklist", value="\n".join([f"{track['position']}. {track['title']} ({track['duration']})" for track in result['tracklist']]), inline=False)
+        await ctx.send(embed=embed)
+
+    @commands.command()
+    async def setalbum(self, ctx, releaseID: int, *, description: str = "No description provided"):
+        if ctx.author.id != 524292628171325442:
+            await ctx.send("stupid bitch member")
+            return
+        result = get_release(releaseID)
+        set_music(releaseID, description)
+        await ctx.send(f"Album set to: {result['artists'][0]['name']} - {result['title']}")
 
 
 async def setup(bot):

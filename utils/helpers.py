@@ -6,6 +6,7 @@ import requests
 # ----- Config -----
 slopperRole = 1348641007948005416  # role ID for slop
 DATA_FILE = "members.json"
+MUSIC_FILE = "music.json"
 
 NO_PERMISSIONS = "stupid bitch admin give perms"
 ERROR_MESSAGE = "stupid error msg"
@@ -15,6 +16,12 @@ if os.path.exists(DATA_FILE):
         stored_members = json.load(f)
 else:
     stored_members = []
+
+if os.path.exists(MUSIC_FILE):
+    with open(MUSIC_FILE, "r") as x:
+        musicData = json.load(x)
+else:
+    musicData = {}
 
 def setAllowedGuilds(cog,listOfGuilds):
       cog.allowList = listOfGuilds
@@ -53,6 +60,18 @@ async def member_is_mentioned(member,ctx):
             return False
      return True
      
+def set_music(releaseID,description):
+    musicData["id"] = releaseID
+    musicData["description"] = description
+    
+    with open(MUSIC_FILE, "w") as x:
+        json.dump(musicData, x, indent=4)
+def get_music_description():
+    return musicData.get("description", "No description provided")
+
+def get_music_id():
+    return musicData.get("id", None)
+    
 def add_to_list(id):
      if id not in stored_members:
                 stored_members.append(id)
@@ -97,10 +116,8 @@ def get_release(id):
         #"Authorization": f"Discogs token={DISCOGS_TOKEN}",
         "User-Agent": "BabyBotBlaze/1.0"
     }
-
     resp = requests.get(url, headers=headers)
     if resp.status_code != 200:
         return f"Error fetching release: {resp.status_code}"
-
     return resp.json()
     
