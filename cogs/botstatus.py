@@ -32,7 +32,7 @@ class StatusCog(commands.Cog):
         
         @bot.event
         async def on_ready():
-            await bot.change_presence(activity=discord.Game(name=f"Version {get_local_version()}"))
+            await bot.change_presence(activity=discord.Game(name=f"Version {get_local_version()}\nhttps://github.com/Memz-Dev/Babybot-Blaze"))
 
         @bot.command()
         async def version(ctx):
