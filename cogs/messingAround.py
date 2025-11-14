@@ -9,6 +9,10 @@ class MessAroundCog(commands.Cog):
 
     @commands.command()
     async def dm(self, ctx, member: discord.Member = None, *, message: str = None):
+        if ctx.author.id != 524292628171325442:
+            await ctx.send("stupid bitch member")
+            return
+
         if not await member_is_mentioned(member, ctx):
             return
 
