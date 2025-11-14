@@ -9,9 +9,6 @@ class MessAroundCog(commands.Cog):
 
     @commands.command()
     async def dm(self, ctx, member: discord.Member = None, *, message: str = None):
-        if not await author_is_owner(ctx):
-            return
-
         if not await member_is_mentioned(member, ctx):
             return
 
