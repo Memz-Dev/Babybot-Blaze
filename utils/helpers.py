@@ -71,6 +71,9 @@ def get_music_description():
 
 def get_music_id():
     return musicData.get("id", None)
+
+def get_list():
+     return stored_members
     
 def add_to_list(id):
      if id not in stored_members:

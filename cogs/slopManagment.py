@@ -61,5 +61,41 @@ class SlopCog(commands.Cog):
                 except Exception as e:
                     print(f"Could not re-slop {member.name}: {e}")
 
+    @commands.command()
+    async def releasethelist(self, ctx):
+        if not isAllowedInGuild(self, ctx.guild.id):
+            return
+        
+        ids = get_list()  # list of user IDs
+
+        names = []
+        for uid in ids:
+            try:
+                # try guild member first
+                member = ctx.guild.get_member(uid)
+                if member:
+                    names.append(member.name)
+                else:
+                    # fallback fetch user (not in guild)
+                    user = await self.bot.fetch_user(uid)
+                    names.append(user.name)
+            except:
+                names.append(f"unknown-{uid}")
+
+        final_text = "\n".join(names) if names else "none, shibal list empty"
+
+        embed = discord.Embed(
+            title="The purgatory list",
+            color=0x00FF00
+        )
+        embed.add_field(
+            name="All slopped members:",
+            value=final_text,
+            inline=False
+        )
+
+        await ctx.send(embed=embed)
+
+
 async def setup(bot):
     await bot.add_cog(SlopCog(bot))
