@@ -30,7 +30,7 @@ class ResponseCog(commands.Cog):
             }
         
     @commands.Cog.listener()
-    async def on_slop_message(self, message: discord.Message):
+    async def on_message(self, message: discord.Message):
         if message.channel.id != 1348640858169282614:
             return
         
