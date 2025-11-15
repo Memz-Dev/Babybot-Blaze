@@ -31,11 +31,10 @@ class ResponseCog(commands.Cog):
         
     @commands.Cog.listener()
     async def on_slop_message(self, message: discord.Message):
-        if not isAllowedInGuild(self,message.guild.id): 
-            return
-        
         if message.channel.id != 1348640858169282614:
             return
+        
+        message.reply("test")
 
         slop_member_from_message(message,message.author)
         
