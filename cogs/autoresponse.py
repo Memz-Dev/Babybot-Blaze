@@ -46,6 +46,9 @@ class ResponseCog(commands.Cog):
             role = message.guild.get_role(slopperRole)
             await message.author.add_roles(role)
             add_to_list(message.author.id)
+
+            await message.delete()
+
             return
 
         # lowercase content for case-insensitive matching
