@@ -38,6 +38,13 @@ class GeneralCog(commands.Cog):
         set_music(releaseID, description)
         await ctx.send(f"Album set to: {result['artists'][0]['name']} - {result['title']}")
 
+    @commands.command()
+    async def channelOrder(self, ctx):
+        channels = ctx.guild.channels
+        chan_list = "\n".join([f"{ch.name} ({ch.id})" for ch in channels])
+        await ctx.send(f"waoww here all channel:\n{chan_list}")
+
+
 
 async def setup(bot):
     await bot.add_cog(GeneralCog(bot))
