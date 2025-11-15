@@ -70,17 +70,7 @@ class SlopCog(commands.Cog):
 
         names = []
         for uid in ids:
-            try:
-                # try guild member first
-                member = ctx.guild.get_member(uid)
-                if member:
-                    names.append(member.name)
-                else:
-                    # fallback fetch user (not in guild)
-                    user = await self.bot.fetch_user(uid)
-                    names.append(user.name)
-            except:
-                names.append(f"unknown-{uid}")
+            names.append(f"<@{uid}>")
 
         final_text = "\n".join(names) if names else "none, shibal list empty"
 
