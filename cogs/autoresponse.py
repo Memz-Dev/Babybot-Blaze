@@ -1,4 +1,5 @@
 import discord
+import re
 from discord.ext import commands
 from utils.helpers import *
 
@@ -55,9 +56,11 @@ class ResponseCog(commands.Cog):
         msg_content = message.content.lower()
 
         for phrase, reply in self.responses.items():
-            if phrase in msg_content:
-                await message.reply(reply,mention_author=False)
-                break  # respond only once per message
+            pattern = rf"\b{re.escape(phrase)}\b"
+
+            if re.search(pattern, msg_content, flags=re.IGNORECASE):
+                await message.reply(reply, mention_author=False)
+                break
 
     @commands.command()
     async def wordlist(self,ctx):
