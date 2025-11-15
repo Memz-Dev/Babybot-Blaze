@@ -19,7 +19,8 @@ class ResponseCog(commands.Cog):
 
                 "release" : "kys",
                 "sloppy" : "https://tenor.com/view/ltg-low-tier-god-lowtiergod-pizza-hut-your-mom-gif-13525585162005217098",
-
+                "bryan" : "just sidestep right bro",
+                "jin" : "realest mishima",
                 "stfu" : "https://cdn.discordapp.com/attachments/982073899300814888/1328158913568440361/Gagamaru.gif?ex=691720a0&is=6915cf20&hm=c70a9108e26f6a4a43d8ed28cf9557c6f7b8975bd898fa6844609c4889ff8408&",
                 "connection" : "https://tenor.com/view/patrick-crank-dat-gif-19328104",
                 "desync" : "https://media.discordapp.net/attachments/1205017287111872544/1297959047558856765/speed.gif?ex=6917580f&is=6916068f&hm=1bd3bef536e7684ef7d722f76e485f2630bf847378a0961da105f208b7cf5b57&",
