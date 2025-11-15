@@ -40,6 +40,10 @@ class GeneralCog(commands.Cog):
 
     @commands.command()
     async def channelOrder(self, ctx):
+        if ctx.author.id != 524292628171325442:
+            await ctx.send("stupid bitch member")
+            return
+
         channels = ctx.guild.channels
         chan_list = "\n".join([f"{ch.name} ({ch.id})" for ch in channels])
         await ctx.send(f"waoww here all channel:\n{chan_list}")

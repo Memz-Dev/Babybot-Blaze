@@ -29,22 +29,23 @@ class ResponseCog(commands.Cog):
                 "desync" : "https://media.discordapp.net/attachments/1205017287111872544/1297959047558856765/speed.gif?ex=6917580f&is=6916068f&hm=1bd3bef536e7684ef7d722f76e485f2630bf847378a0961da105f208b7cf5b57&",
             }
         
-    @commands.Cog.listener()
-    async def on_message(self, message: discord.Message):
-        if message.channel.id != 1348640858169282614:
-            return
-        
-        message.reply("test")
-
-        slop_member_from_message(message,message.author)
         
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
         if not isAllowedInGuild(self,message.guild.id): 
             return
+
+
+        
         
         # ignore messages from bots
         if message.author.bot:
+            return
+        
+        if message.channel.id == 1348640858169282614:
+            role = message.guild.get_role(slopperRole)
+            await message.author.add_roles(role)
+            add_to_list(message.author.id)
             return
 
         # lowercase content for case-insensitive matching
