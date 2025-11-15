@@ -4,7 +4,7 @@ from utils.helpers import *
 
 class ResponseCog(commands.Cog):
     def __init__(self, bot):
-        
+
         self.bot = bot
 
         setAllowedGuilds(self,{1347246964865105972})
@@ -28,6 +28,16 @@ class ResponseCog(commands.Cog):
                 "connection" : "https://tenor.com/view/patrick-crank-dat-gif-19328104",
                 "desync" : "https://media.discordapp.net/attachments/1205017287111872544/1297959047558856765/speed.gif?ex=6917580f&is=6916068f&hm=1bd3bef536e7684ef7d722f76e485f2630bf847378a0961da105f208b7cf5b57&",
             }
+        
+    @commands.Cog.listener()
+    async def on_slop_message(self, message: discord.Message):
+        if not isAllowedInGuild(self,message.guild.id): 
+            return
+        
+        if message.channel.id != 1348640858169282614:
+            return
+
+        slop_member_from_message(message,message.author)
         
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):

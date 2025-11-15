@@ -82,6 +82,13 @@ def remove_from_list(id):
                 stored_members.remove(id)
                 save_data()
 
+async def slop_member_from_message(message,member,ignore_write : bool = False):
+    role = message.guild.get_role(slopperRole)
+
+    await member.add_roles(role)
+    add_to_list(member.id)
+    return True
+
 async def slop_member(ctx,member,ignore_write : bool = False):
     role = ctx.guild.get_role(slopperRole)
 
