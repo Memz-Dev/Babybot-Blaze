@@ -12,7 +12,7 @@ class GeneralCog(commands.Cog):
         if not isAllowedInGuild(self,ctx.guild.id): 
             return
         
-        await ctx.send("!slopmeplease")
+        await ctx.send("!slopmeplease\n!album\n!trello")
 
     @commands.command()
     async def album(self, ctx):
@@ -47,6 +47,12 @@ class GeneralCog(commands.Cog):
         channels = ctx.guild.channels
         chan_list = "\n".join([f"{ch.name} ({ch.id})" for ch in channels])
         await ctx.send(f"waoww here all channel:\n{chan_list}")
+
+    @commands.command()
+    async def trello(self,ctx):
+        if not isAllowedInGuild(self,ctx.guild.id): 
+            return
+        await ctx.send("https://trello.com/b/fF4kEIqI/crash-out-shit")
 
 
 
