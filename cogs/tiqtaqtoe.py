@@ -3,7 +3,7 @@ from discord.ext import commands
 from utils.helpers import *
 import random
 
-class MessAroundCog(commands.Cog):
+class TTTCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         setAllowedGuilds(self,{1415255360473796692})
@@ -11,18 +11,18 @@ class MessAroundCog(commands.Cog):
     
 
     @commands.command()
-    async def kiesgoon(self, ctx, message: str = None):
+    async def kiesgoon(self, ctx, *, message: str = None):
         if not isAllowedInGuild(self, ctx.guild.id):
             return
 
         members = [m for m in ctx.guild.members if not m.bot]
-       
         member = random.choice(members)
 
-        await ctx.send(f"{member.name} {message or ''}")
+        await ctx.send(f"{member.mention} {message or ''}")
 
+    
 
 
 
 async def setup(bot):
-    await bot.add_cog(MessAroundCog(bot))
+    await bot.add_cog(TTTCog(bot))

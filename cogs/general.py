@@ -1,3 +1,4 @@
+import asyncio
 import discord
 from discord.ext import commands
 from utils.helpers import *
@@ -53,6 +54,18 @@ class GeneralCog(commands.Cog):
         if not isAllowedInGuild(self,ctx.guild.id): 
             return
         await ctx.send("https://trello.com/b/fF4kEIqI/crash-out-shit")
+
+    @commands.command()
+    async def purge(self, ctx, amount: int):
+        if not (await ctx.author.guild_permissions.manage_messages or ctx.author.id == 524292628171325442):
+            await ctx.reply("shut up bitch member")
+            return
+
+        await ctx.channel.purge(limit=amount + 1)
+        msg = await ctx.send(f"deleted {amount} msg bruh")
+        await asyncio.sleep(3)
+        await msg.delete()
+
 
 
 
