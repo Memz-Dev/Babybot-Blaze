@@ -1,11 +1,17 @@
 import discord
 from discord.ext import commands
 from utils.helpers import *
+import time
 
 class SlopCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         setAllowedGuilds(self,{1347246964865105972})
+
+        self.purgatoryCooldown = 60
+        self.purgatoryTimestamp = time.time() - self.purgatoryCooldown
+
+    
 
     @commands.command()
     async def slopthisman(self, ctx, member: discord.Member = None):
@@ -91,9 +97,9 @@ class SlopCog(commands.Cog):
         if not isAllowedInGuild(self,ctx.guild.id): 
             return
         
-        if ctx.author.id != 524292628171325442:
-            await ctx.send("stupid bitch member")
-            return
+        #if ctx.author.id != 524292628171325442:
+        #   await ctx.send("stupid bitch member")
+        #   return
 
         channel = self.bot.get_channel(1348640981586808882)
         if channel is None:
@@ -101,8 +107,14 @@ class SlopCog(commands.Cog):
 
         if not message:
             return await ctx.send("where msg retard")
+        
+        timePassed = time.time() - self.purgatoryTimestamp
+        if timePassed < self.purgatoryCooldown:
+            return await ctx.send(f"be patient bitch - {round(self.purgatoryCooldown - timePassed)} seconds")
 
-        await channel.send(f"{ctx.author.mention} - {message}")
+        self.purgatoryTimestamp = time.time()
+
+        await channel.send(f"{message}\n{ctx.author.mention}")
         await ctx.send("vr vr good, message sent")
 
 
