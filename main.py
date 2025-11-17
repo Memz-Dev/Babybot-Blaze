@@ -22,6 +22,8 @@ async def main():
     await bot.load_extension("cogs.autoresponse")
     await bot.load_extension("cogs.botstatus")
     await bot.load_extension("cogs.messingAround")
+    await bot.load_extension("cogs.tiqtaqtoe")
+
     print("Starting bot")
     
     # use start() instead of run()
