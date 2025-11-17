@@ -114,7 +114,7 @@ class SlopCog(commands.Cog):
 
         self.purgatoryTimestamp = time.time()
 
-        await channel.send(f"{message}\n{ctx.author.mention}")
+        await channel.send(f"{message}\n*- {ctx.author.name}*")
         await ctx.send("vr vr good, message sent")
 
 
