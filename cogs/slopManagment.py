@@ -86,6 +86,25 @@ class SlopCog(commands.Cog):
 
         await ctx.send(embed=embed)
 
+    @commands.command()
+    async def purgatorymessage(self, ctx, *, message: str = None):
+        if not isAllowedInGuild(self,ctx.guild.id): 
+            return
+        
+        if ctx.author.id != 524292628171325442:
+            await ctx.send("stupid bitch member")
+            return
+
+        channel = self.bot.get_channel(1348640981586808882)
+        if channel is None:
+            return
+
+        if not message:
+            return await ctx.send("where msg retard")
+
+        await channel.send(f"{ctx.author.mention} - {message}")
+        await ctx.send("vr vr good, message sent")
+
 
 async def setup(bot):
     await bot.add_cog(SlopCog(bot))
