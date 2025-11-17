@@ -5,6 +5,11 @@ import requests
 
 # ----- Config -----
 slopperRole = 1348641007948005416  # role ID for slop
+purgatory = 1348640981586808882
+auto_slop_channel = 1348640858169282614
+
+owner_id = 524292628171325442
+
 DATA_FILE = "members.json"
 MUSIC_FILE = "music.json"
 
@@ -42,8 +47,8 @@ def has_manage_roles(ctx):
 async def author_is_owner(ctx):
       if ctx.author.id != 524292628171325442:
             await ctx.send("stupid bitch member")
-            return True
-      return False
+            return False
+      return True
 
 async def quick_check_roleEdit(ctx):
     """Check if the command author can manage roles"""

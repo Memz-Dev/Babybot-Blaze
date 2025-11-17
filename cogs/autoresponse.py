@@ -37,15 +37,13 @@ class ResponseCog(commands.Cog):
     async def on_message(self, message: discord.Message):
         if not isAllowedInGuild(self,message.guild.id): 
             return
-
-
-        
         
         # ignore messages from bots
         if message.author.bot:
             return
         
-        if message.channel.id == 1348640858169282614:
+        if message.channel.id == auto_slop_channel:
+
             role = message.guild.get_role(slopperRole)
             await message.author.add_roles(role)
             add_to_list(message.author.id)
@@ -66,7 +64,7 @@ class ResponseCog(commands.Cog):
 
     @commands.command()
     async def wordlist(self,ctx):
-        if not isOwner(ctx.author.id):
+        if not await author_is_owner(ctx):
             return
         
         newString = ""

@@ -32,8 +32,7 @@ class GeneralCog(commands.Cog):
 
     @commands.command()
     async def setalbum(self, ctx, releaseID: int, *, description: str = "No description provided"):
-        if ctx.author.id != 524292628171325442:
-            await ctx.send("stupid bitch member")
+        if not await author_is_owner(ctx):
             return
         result = get_release(releaseID)
         set_music(releaseID, description)
@@ -41,8 +40,7 @@ class GeneralCog(commands.Cog):
 
     @commands.command()
     async def channelOrder(self, ctx):
-        if ctx.author.id != 524292628171325442:
-            await ctx.send("stupid bitch member")
+        if not await author_is_owner(ctx):
             return
 
         channels = ctx.guild.channels
