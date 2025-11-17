@@ -11,16 +11,13 @@ class MessAroundCog(commands.Cog):
     
 
     @commands.command()
-    async def kiesgoon(self, ctx, member: discord.Member = None, *, message: str = None):
+    async def kiesgoon(self, ctx, message: str = None):
         if not isAllowedInGuild(self, ctx.guild.id):
             return
 
-        # if no member given, choose random one
-        if member is None:
-            members = [m for m in ctx.guild.members if not m.bot]
-            if not members:
-                return await ctx.send("no human here bruh..")
-            member = random.choice(members)
+        members = [m for m in ctx.guild.members if not m.bot]
+       
+        member = random.choice(members)
 
         await ctx.send(f"{member.name} {message or ''}")
 
