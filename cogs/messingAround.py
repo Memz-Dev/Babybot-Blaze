@@ -7,6 +7,8 @@ class MessAroundCog(commands.Cog):
         self.bot = bot
         #setAllowedGuilds(self,{1347246964865105972})
 
+    
+
     @commands.command()
     async def dm(self, ctx, member: discord.Member = None, *, message: str = None):
         if ctx.author.id != 524292628171325442:
