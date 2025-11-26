@@ -8,7 +8,7 @@ class ResponseCog(commands.Cog):
 
         self.bot = bot
 
-        setAllowedGuilds(self,{1347246964865105972})
+        setAllowedGuilds(self,{1347246964865105972,1415255360473796692})
 
         self.responses = {
                 "kazuya": "sigma",
