@@ -28,6 +28,8 @@ class ResponseCog(commands.Cog):
                 "sloppy" : "https://tenor.com/view/ltg-low-tier-god-lowtiergod-pizza-hut-your-mom-gif-13525585162005217098",
                 "bryan" : "just sidestep right bro",
                 "jin" : "realest mishima",
+                "unc still got it" : "https://tenor.com/view/unc-still-got-it-gif-6384030002593541773",
+                "carried" : "https://media.discordapp.net/attachments/167635765008924672/1227386687173427241/ggs.gif?ex=692d6fad&is=692c1e2d&hm=584d78b35178c438e3bd12052968fd7b2587074b3eefcdc9b89272e506a847c3&",
                 "tmm" : "https://cdn.discordapp.com/attachments/1348639986399969332/1444114558292725810/tuffy.gif?ex=692b87fd&is=692a367d&hm=306401526394d93bf804ce2cb084e6aed803fbf971c88becde045c51267ea042&",
                 "mainman" : "https://cdn.discordapp.com/attachments/1348639986399969332/1444114558292725810/tuffy.gif?ex=692b87fd&is=692a367d&hm=306401526394d93bf804ce2cb084e6aed803fbf971c88becde045c51267ea042&",
                 "paul" : "https://tenor.com/view/fuzzydimonds-fuzzmanse-paul-pheonix-tekken-tag-tournament-2-tt2-gif-6154751673589864114",
