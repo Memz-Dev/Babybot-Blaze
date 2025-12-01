@@ -24,6 +24,8 @@ class ResponseCog(commands.Cog):
                 "ms2k" : "https://tenor.com/view/martinsugar2k-gif-5932750616034456338",
                 "kunimitsu" : "https://tenor.com/view/low-parry-low-parry-tekken-7-gif-2181756876575504452",
                 "release" : "kys",
+                "guilty gear" : "BANNED WORD",
+                "ggst" : "BANNED WORD",
                 "king" : "Well I guess just try to break his grabs everytime he tries to grab, and if he should ever whiff then get a combo on him",
                 "sloppy" : "https://tenor.com/view/ltg-low-tier-god-lowtiergod-pizza-hut-your-mom-gif-13525585162005217098",
                 "bryan" : "just sidestep right bro",
