@@ -66,6 +66,41 @@ class GeneralCog(commands.Cog):
         await asyncio.sleep(3)
         await msg.delete()
 
+    emojis = ['🫃', '💀', '🥀']
+    @commands.command()
+    async def slime(self, ctx):
+        global emojis
+        # Check if the message is a reply to another message
+        if ctx.message.reference:
+            # Get the ID of the referenced message
+            message_id = ctx.message.reference.message_id
+            
+            # Get the actual message object that was replied to
+            try:
+                target_message = await ctx.fetch_message(message_id)
+            except discord.NotFound:
+                # If the replied message is not found (maybe it was deleted)
+                await ctx.send("waoww! Cannot find message you replied to!")
+                return
+                
+            # Make list of emojis you want to use
+             # Changed to more "slime" theme emojis!
+
+            # Loop vr vr much through list and add reaction one by one
+            for emoji in emojis:
+                try:
+                    # Add the reaction to the target message
+                    await target_message.add_reaction(emoji)
+                except Exception as e:
+                    print(f"Error adding reaction {emoji}: {e}")
+            
+            # Optional: Delete the command message after reacting
+            # await ctx.message.delete()
+            
+        else:
+            # If the command was not a reply, tell the user!
+            await ctx.send("You must reply to message with this command for it to work!")
+
 
 
 
