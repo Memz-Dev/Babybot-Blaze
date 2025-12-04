@@ -72,6 +72,7 @@ class GeneralCog(commands.Cog):
         if ctx.message.reference:
             # Get the ID of the referenced message
             message_id = ctx.message.reference.message_id
+            await ctx.send(message_id)
             
             # Get the actual message object that was replied to
             try:
