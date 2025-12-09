@@ -26,6 +26,7 @@ class ResponseCog(commands.Cog):
                 "release" : "kys",
                 "guilty gear" : "BANNED WORD",
                 "ggst" : "BANNED WORD",
+                "<@549395807003213825>" : "Do you believe in the big bang theory or pangrea?",
                 "king" : "Well I guess just try to break his grabs everytime he tries to grab, and if he should ever whiff then get a combo on him",
                 "sloppy" : "https://tenor.com/view/ltg-low-tier-god-lowtiergod-pizza-hut-your-mom-gif-13525585162005217098",
                 "bryan" : "just sidestep right bro",
