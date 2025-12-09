@@ -3,6 +3,14 @@ import discord
 from discord.ext import commands
 from utils.helpers import *
 
+async def slime_message(message):
+        for emoji in emojis:
+                try:
+                    # Add the reaction to the target message
+                    await message.add_reaction(emoji)
+                except Exception as e:
+                    print(f"Error adding reaction {emoji}: {e}")
+
 class GeneralCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -63,6 +71,32 @@ class GeneralCog(commands.Cog):
         msg = await ctx.send(f"deleted {amount} msg bruh")
         await asyncio.sleep(3)
         await msg.delete()
+
+    
+
+    emojis = ['🫃', '💀', '🥀']
+    @commands.command()
+    async def slime(self, ctx):
+        global emojis
+        await slime_message(ctx.message)
+        # Check if the message is a reply to another message
+        if ctx.message.reference:
+            # Get the ID of the referenced message
+            message_id = ctx.message.reference.message_id
+            await ctx.send(message_id)
+            
+            # Get the actual message object that was replied to
+            try:
+                target_message = await ctx.fetch_message(message_id)
+            except discord.NotFound:
+                # If the replied message is not found (maybe it was deleted)
+                await ctx.send("waoww! Cannot find message you replied to!")
+                return
+            
+            await slime_message(target_message)
+        else:
+            # If the command was not a reply, tell the user!
+            await ctx.send("You must reply to message with this command for it to work!")
 
 
 
