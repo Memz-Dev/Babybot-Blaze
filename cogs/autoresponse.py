@@ -24,6 +24,7 @@ class ResponseCog(commands.Cog):
                 "ms2k" : "https://tenor.com/view/martinsugar2k-gif-5932750616034456338",
                 "kunimitsu" : "https://tenor.com/view/low-parry-low-parry-tekken-7-gif-2181756876575504452",
                 "release" : "kys",
+                "chud" : "https://cdn.discordapp.com/attachments/1348640981586808882/1454964167420411954/images.png?ex=69530079&is=6951aef9&hm=7c381e931e19eb9875f7ad659c40f56521d8edea9f43990ab50c1a4b7f4bbfc9&",
                 "guilty gear" : "BANNED WORD",
                 "ggst" : "BANNED WORD",
                 "origin" : "Do you believe in the big bang theory or pangrea?",
