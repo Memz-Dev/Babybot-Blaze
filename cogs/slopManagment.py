@@ -26,6 +26,7 @@ class SlopCog(commands.Cog):
         
         if await slop_member(ctx,member) == True:
             await ctx.send(f"{member.mention} haha bitch member slop")
+            await announce_slopped_member(self.bot,member)
 
 
     @commands.command()
@@ -52,6 +53,7 @@ class SlopCog(commands.Cog):
 
         if await slop_member(ctx,member) == True:
             await ctx.send(f"{member.mention} wow self slop")
+            await announce_slopped_member(self.bot,member)
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
@@ -64,6 +66,7 @@ class SlopCog(commands.Cog):
             if role:
                 try:
                     await member.add_roles(role)
+                    await announce_slopped_member(self.bot,member)
                 except Exception as e:
                     print(f"Could not re-slop {member.name}: {e}")
 
@@ -91,10 +94,6 @@ class SlopCog(commands.Cog):
         )
 
         await ctx.send(embed=embed)
-
-    @commands.command()
-    async def testMessage(self,ctx):
-        await announce_slopped_member(self.bot,ctx.author)
 
     @commands.command()
     async def purgatorymessage(self, ctx, *, message: str = None):
