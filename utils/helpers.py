@@ -97,6 +97,11 @@ async def slop_member_from_message(message,member,ignore_write : bool = False):
     add_to_list(member.id)
     return True
 
+async def announce_slopped_member(bot,member):
+    channel = bot.get_channel(purgatory)
+    channel.send(f"welcome to purgatory <@{member.id}>")
+
+
 async def slop_member(ctx,member,ignore_write : bool = False):
     role = ctx.guild.get_role(slopperRole)
 
