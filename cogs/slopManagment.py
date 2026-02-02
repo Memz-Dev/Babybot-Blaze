@@ -94,7 +94,7 @@ class SlopCog(commands.Cog):
 
     @commands.command()
     async def testMessage(self,ctx):
-        announce_slopped_member(self.bot,ctx.author)
+        await announce_slopped_member(self.bot,ctx.author)
 
     @commands.command()
     async def purgatorymessage(self, ctx, *, message: str = None):
