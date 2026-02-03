@@ -3,6 +3,8 @@ import discord
 from discord.ext import commands
 from utils.helpers import *
 
+log_channel = 1468248316235219065
+
 class SniperCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -12,17 +14,19 @@ class SniperCog(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message_delete(self,message):
+        if not isAllowedInGuild(self,message.guild.id): 
+            return
+        
         if message.author.bot:
             return
 
         if not message.content and not message.attachments:
             return
 
-        # 3. Create the "Caught" embed
         embed = discord.Embed(
             title="",
             description=message.content if message.content else "*[No text content]*",
-            color=0xff4747, # Bright red
+            color=0xff4747,
             timestamp=datetime.datetime.now()
         )
 
@@ -31,15 +35,18 @@ class SniperCog(commands.Cog):
             icon_url=message.author.display_avatar.url
         )
 
-        # 4. Handle images/attachments
         if message.attachments:
-            # We try to grab the first image if it exists
             embed.set_image(url=message.attachments[0].url)
             embed.add_field(name="Attachments", value=f"{len(message.attachments)} file(s) attached")
 
-        # 5. Send it immediately back to the channel where it was deleted
         await message.channel.send(content=f"**{message.author.mention} deletin messages**", embed=embed)
 
+        # send the same embed to the logs channel, but edit the embed to also add in the channel that it was deleted from
+        logs = self.bot.get_channel(log_channel)
+        if logs:
+            # We add the channel info specifically for the logs
+            embed.add_field(name="Channel", value=message.channel.mention, inline=False)
+            await logs.send(embed=embed)
 
 
 async def setup(bot):
