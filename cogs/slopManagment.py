@@ -95,7 +95,7 @@ class SlopCog(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @commands.command()
+    @commands.command(aliases=['pm'])
     async def purgatorymessage(self, ctx, *, message: str = None):
         if not isAllowedInGuild(self,ctx.guild.id): 
             return
@@ -119,6 +119,7 @@ class SlopCog(commands.Cog):
 
         await channel.send(f"{message}\n*- {ctx.author.name}*")
         await ctx.send("vr vr good, message sent")
+        
 
 
 async def setup(bot):
