@@ -23,6 +23,7 @@ async def main():
     await bot.load_extension("cogs.botstatus")
     await bot.load_extension("cogs.messingAround")
     await bot.load_extension("cogs.tiqtaqtoe")
+    await bot.load_extension("cogs.messageSniper")
 
     print("Starting bot")
     
