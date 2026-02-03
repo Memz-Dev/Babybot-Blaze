@@ -20,7 +20,7 @@ class SniperCog(commands.Cog):
 
         # 3. Create the "Caught" embed
         embed = discord.Embed(
-            title="lil jit tryna delete",
+            title="",
             description=message.content if message.content else "*[No text content]*",
             color=0xff4747, # Bright red
             timestamp=datetime.datetime.now()
@@ -38,7 +38,7 @@ class SniperCog(commands.Cog):
             embed.add_field(name="Attachments", value=f"{len(message.attachments)} file(s) attached")
 
         # 5. Send it immediately back to the channel where it was deleted
-        await message.channel.send(content=f"**{message.author.mention}**", embed=embed)
+        await message.channel.send(content=f"**{message.author.mention} deletin messages**", embed=embed)
 
 
 
