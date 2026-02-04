@@ -26,7 +26,7 @@ class GeneralCog(commands.Cog):
     @commands.command()
     async def album(self, ctx):
         
-        result = get_release(get_music_id())
+        result = await get_release_async(get_music_id())
         
         embed = discord.Embed(
                     title=f"Current Album: {result['artists'][0]['name']} - {result['title']}",
@@ -42,7 +42,7 @@ class GeneralCog(commands.Cog):
     async def setalbum(self, ctx, releaseID: int, *, description: str = "No description provided"):
         if not await author_is_owner(ctx):
             return
-        result = get_release(releaseID)
+        result = await get_release_async(releaseID)
         set_music(releaseID, description)
         await ctx.send(f"Album set to: {result['artists'][0]['name']} - {result['title']}")
 

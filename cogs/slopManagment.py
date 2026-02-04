@@ -26,7 +26,7 @@ class SlopCog(commands.Cog):
         
         if await slop_member(ctx,member) == True:
             await ctx.send(f"{member.mention} haha bitch member slop")
-            await announce_slopped_member(self.bot,member)
+            await announce_slopped_member(self.bot,member,"Slopped by admin")
 
 
     @commands.command()
@@ -53,7 +53,7 @@ class SlopCog(commands.Cog):
 
         if await slop_member(ctx,member) == True:
             await ctx.send(f"{member.mention} wow self slop")
-            await announce_slopped_member(self.bot,member)
+            await announce_slopped_member(self.bot,member,"Self slop")
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
@@ -66,7 +66,7 @@ class SlopCog(commands.Cog):
             if role:
                 try:
                     await member.add_roles(role)
-                    await announce_slopped_member(self.bot,member)
+                    await announce_slopped_member(self.bot,member,"Rejoin")
                 except Exception as e:
                     print(f"Could not re-slop {member.name}: {e}")
 

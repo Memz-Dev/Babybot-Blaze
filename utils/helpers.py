@@ -2,12 +2,13 @@ import json
 import os
 import discord
 import requests
+import aiohttp
 
 # ----- Config -----
 slopperRole = 1348641007948005416  # role ID for slop
 purgatory = 1348640981586808882
 auto_slop_channel = 1348640858169282614
-
+logs = 1348644498904977479
 owner_id = 524292628171325442
 
 DATA_FILE = "members.json"
@@ -71,6 +72,7 @@ def set_music(releaseID,description):
     
     with open(MUSIC_FILE, "w") as x:
         json.dump(musicData, x, indent=4)
+
 def get_music_description():
     return musicData.get("description", "No description provided")
 
@@ -97,9 +99,13 @@ async def slop_member_from_message(message,member,ignore_write : bool = False):
     add_to_list(member.id)
     return True
 
-async def announce_slopped_member(bot,member):
+async def announce_slopped_member(bot,member,reason):
     channel = bot.get_channel(purgatory)
-    await channel.send(f"welcome to purgatory <@{member.id}>")
+    log_channel = bot.get_channel(logs)
+
+    await log_channel.send(f"<@{member.id}> entered purgatory: {reason}")
+
+    await channel.send(f"welcome to purgatory <@{member.id}>\n{reason}")
 
 
 async def slop_member(ctx,member,ignore_write : bool = False):
@@ -140,4 +146,18 @@ def get_release(id):
     if resp.status_code != 200:
         return f"Error fetching release: {resp.status_code}"
     return resp.json()
+
+
+# It's best to use a single session for the bot, but here's the logic:
+async def get_release_async(id):
+    url = f"https://api.discogs.com/releases/{id}"
+    headers = {
+        "User-Agent": "BabyBotBlaze/1.0"
+    }
+    
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url, headers=headers) as resp:
+            if resp.status != 200:
+                return f"Error fetching release: {resp.status}"
+            return await resp.json()
     
