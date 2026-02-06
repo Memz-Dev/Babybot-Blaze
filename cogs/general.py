@@ -78,15 +78,11 @@ class GeneralCog(commands.Cog):
 
     @commands.command()
     async def slime(self, ctx):
-        # 1. Slime the command message itself (optional, but you had it in your code)
-        await slime_message(ctx.message)
-        
-        # 2. Check if the message is a reply
+        if not await author_is_owner(ctx):
+            return
+
         if ctx.message.reference:
-            # reference.resolved is a shortcut to get the message object directly
             target_message = ctx.message.reference.resolved
-            
-            # If the message isn't in the bot's cache, fetch it manually
             if not isinstance(target_message, discord.Message):
                 try:
                     target_message = await ctx.channel.fetch_message(ctx.message.reference.message_id)
@@ -94,11 +90,9 @@ class GeneralCog(commands.Cog):
                     await ctx.send("waoww! Cannot find message you replied to!")
                     return
 
-            # 3. Slime the target!
-            await slime_message(target_message)
-            
+            await slime_message(target_message)            
         else:
-            await ctx.send("You must reply to message with this command for it to work!")
+            await ctx.send("reply you bum")
 
 
 
