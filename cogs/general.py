@@ -3,6 +3,8 @@ import discord
 from discord.ext import commands
 from utils.helpers import *
 
+emojis = ['🫃', '💀', '🥀']
+
 async def slime_message(message):
         for emoji in emojis:
                 try:
@@ -74,28 +76,28 @@ class GeneralCog(commands.Cog):
 
     
 
-    emojis = ['🫃', '💀', '🥀']
     @commands.command()
     async def slime(self, ctx):
-        global emojis
+        # 1. Slime the command message itself (optional, but you had it in your code)
         await slime_message(ctx.message)
-        # Check if the message is a reply to another message
+        
+        # 2. Check if the message is a reply
         if ctx.message.reference:
-            # Get the ID of the referenced message
-            message_id = ctx.message.reference.message_id
-            await ctx.send(message_id)
+            # reference.resolved is a shortcut to get the message object directly
+            target_message = ctx.message.reference.resolved
             
-            # Get the actual message object that was replied to
-            try:
-                target_message = await ctx.fetch_message(message_id)
-            except discord.NotFound:
-                # If the replied message is not found (maybe it was deleted)
-                await ctx.send("waoww! Cannot find message you replied to!")
-                return
-            
+            # If the message isn't in the bot's cache, fetch it manually
+            if not isinstance(target_message, discord.Message):
+                try:
+                    target_message = await ctx.channel.fetch_message(ctx.message.reference.message_id)
+                except discord.NotFound:
+                    await ctx.send("waoww! Cannot find message you replied to!")
+                    return
+
+            # 3. Slime the target!
             await slime_message(target_message)
+            
         else:
-            # If the command was not a reply, tell the user!
             await ctx.send("You must reply to message with this command for it to work!")
 
 
