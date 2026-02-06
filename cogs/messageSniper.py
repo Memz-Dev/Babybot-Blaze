@@ -27,7 +27,7 @@ class SniperCog(commands.Cog):
             title="",
             description=message.content if message.content else "*[No text content]*",
             color=0xff4747,
-            timestamp=datetime.datetime.now()
+            timestamp=message.created_at
         )
 
         embed.set_author(
