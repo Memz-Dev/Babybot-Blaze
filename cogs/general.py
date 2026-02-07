@@ -2,6 +2,7 @@ import asyncio
 import discord
 from discord.ext import commands
 from utils.helpers import *
+import random
 
 emojis = ['🫃', '💀', '🥀']
 
@@ -93,6 +94,14 @@ class GeneralCog(commands.Cog):
             await slime_message(target_message)            
         else:
             await ctx.send("reply you bum")
+
+    @commands.command()
+    async def skylargooned(self, ctx):
+        char_list = skylarFiles.get("characters", [])
+        
+        if char_list:
+            chosen_char = random.choice(char_list)
+            await ctx.send(f"skylar has gooned to {chosen_char}")
 
 
 

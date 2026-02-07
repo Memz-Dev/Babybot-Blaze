@@ -13,10 +13,17 @@ owner_id = 524292628171325442
 
 DATA_FILE = "members.json"
 MUSIC_FILE = "music.json"
+SKYLAR_FILE = "skylarfiles.json"
 
 NO_PERMISSIONS = "stupid bitch admin give perms"
 ERROR_MESSAGE = "stupid error msg"
 # ----- Persistent storage -----
+if os.path.exists(SKYLAR_FILE):
+    with open(SKYLAR_FILE, "r") as f:
+        skylarFiles = json.load(f)
+else:
+    skylarFiles = []
+
 if os.path.exists(DATA_FILE):
     with open(DATA_FILE, "r") as f:
         stored_members = json.load(f)
