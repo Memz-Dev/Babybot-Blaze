@@ -103,6 +103,11 @@ class GeneralCog(commands.Cog):
             chosen_char = random.choice(char_list)
             await ctx.send(f"skylar has gooned to {chosen_char}")
 
+    @commands.command()
+    async def skylarquote(self,ctx):
+        await ctx.send(f"skylar: '{skylarFiles.get("caption")}'")
+
+
 
 
 
