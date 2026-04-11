@@ -22,6 +22,17 @@ class SniperCog(commands.Cog):
 
         if not message.content and not message.attachments:
             return
+        
+        if message.guild is None:
+            return
+        
+        deleter = message.author
+
+        async for entry in message.guild.audit_logs(action=discord.AuditLogAction.message_delete, limit=1):
+            # Check if the log entry matches the message author and happened recently
+            if entry.target == message.author:
+                deleter = entry.user
+                return
 
         embed = discord.Embed(
             title="",
@@ -39,7 +50,8 @@ class SniperCog(commands.Cog):
             embed.set_image(url=message.attachments[0].url)
             embed.add_field(name="Attachments", value=f"{len(message.attachments)} file(s) attached")
 
-        await message.channel.send(content=f"**{message.author.mention} deletin messages**", embed=embed)
+        if deleter.id == message.author.id:
+            await message.channel.send(content=f"**{message.author.mention} deletin messages**", embed=embed)
 
         logs = self.bot.get_channel(log_channel)
         if logs:

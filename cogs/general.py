@@ -107,6 +107,10 @@ class GeneralCog(commands.Cog):
     async def skylarquote(self,ctx):
         await ctx.send(f"skylar: '{skylarFiles.get("caption")}'")
 
+    @commands.command()
+    async def goonlist(self,ctx):
+        await ctx.send(f"[skylar goon list](https://github.com/Memz-Dev/Babybot-Blaze/blob/main/skylarfiles.json)")
+
 
 
 
