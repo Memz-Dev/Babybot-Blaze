@@ -49,8 +49,8 @@ class GeneralCog(commands.Cog):
                     description=f"",
                     color=0x00FF00
                 )
-        embed.add_field(name="Character AI", value=f"{skylarBots.get("character_ai_account").get("user")}\n(Link)[{skylarBots.get("character_ai_account").get("link")}]", inline=False)
-        embed.add_field(name="Janitor AI", value=f"{skylarBots.get("janitor_ai_account").get("user")}\n(Link)[{skylarBots.get("janitor_ai_account").get("link")}]", inline=False)
+        embed.add_field(name="Character AI", value=f"{skylarBots.get("character_ai_account").get("user")}\n[Link]({skylarBots.get("character_ai_account").get("link")})", inline=False)
+        embed.add_field(name="Janitor AI", value=f"{skylarBots.get("janitor_ai_account").get("user")}\n[Link]({skylarBots.get("janitor_ai_account").get("link")})", inline=False)
         await ctx.send(embed=embed)
 
     @commands.command()
