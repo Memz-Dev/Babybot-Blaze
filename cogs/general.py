@@ -42,6 +42,18 @@ class GeneralCog(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
+    async def skylaraccounts(self, ctx):
+        
+        embed = discord.Embed(
+                    title=f"Skylar's AI Accounts",
+                    description=f"",
+                    color=0x00FF00
+                )
+        embed.add_field(name="Character AI", value=f"{skylarBots.get("character_ai_account").get("user")}\n(Link)[{skylarBots.get("character_ai_account").get("link")}]", inline=False)
+        embed.add_field(name="Janitor AI", value=f"{skylarBots.get("janitor_ai_account").get("user")}\n(Link)[{skylarBots.get("janitor_ai_account").get("link")}]", inline=False)
+        await ctx.send(embed=embed)
+
+    @commands.command()
     async def setalbum(self, ctx, releaseID: int, *, description: str = "No description provided"):
         if not await author_is_owner(ctx):
             return
@@ -102,6 +114,7 @@ class GeneralCog(commands.Cog):
         if char_list:
             chosen_char = random.choice(char_list)
             await ctx.send(f"skylar has gooned to {chosen_char}")
+
 
     @commands.command()
     async def skylarquote(self,ctx):
