@@ -14,6 +14,7 @@ owner_id = 524292628171325442
 DATA_FILE = "members.json"
 MUSIC_FILE = "music.json"
 SKYLAR_FILE = "skylarfiles.json"
+SKYLAR_BOTS = "skylarbots.json"
 
 NO_PERMISSIONS = "stupid bitch admin give perms"
 ERROR_MESSAGE = "stupid error msg"
@@ -23,6 +24,12 @@ if os.path.exists(SKYLAR_FILE):
         skylarFiles = json.load(f)
 else:
     skylarFiles = []
+
+if os.path.exists(SKYLAR_BOTS):
+    with open(SKYLAR_BOTS, "r") as f:
+        skylarBots = json.load(f)
+else:
+    skylarBots = {}
 
 if os.path.exists(DATA_FILE):
     with open(DATA_FILE, "r") as f:

@@ -8,37 +8,28 @@ log_channel = 1468248316235219065
 class SniperCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        setAllowedGuilds(self,{1347246964865105972})
-
-    
+        setAllowedGuilds(self, {1347246964865105972})
 
     @commands.Cog.listener()
-    async def on_message_delete(self,message):
-        if not isAllowedInGuild(self,message.guild.id): 
-            return
-        
-        if message.author.bot:
+    async def on_message_delete(self, message):
+        if not isAllowedInGuild(self, message.guild.id) or message.author.bot or message.guild is None: 
             return
 
         if not message.content and not message.attachments:
             return
         
-        if message.guild is None:
-            return
-        
+        # Note: Audit logs can be slow; this logic often needs a slight delay or specific handling
         deleter = message.author
-
         async for entry in message.guild.audit_logs(action=discord.AuditLogAction.message_delete, limit=1):
-            # Check if the log entry matches the message author and happened recently
-            if entry.target == message.author:
+            if entry.target == message.author and (datetime.datetime.now(datetime.timezone.utc) - entry.created_at).total_seconds() < 5:
                 deleter = entry.user
-                return
+                break # Use break instead of return so the code below actually runs
 
         embed = discord.Embed(
-            title="",
+            title="Message Deleted",
             description=message.content if message.content else "*[No text content]*",
             color=0xff4747,
-            timestamp=message.created_at
+            timestamp=discord.utils.utcnow()
         )
 
         embed.set_author(
@@ -50,12 +41,46 @@ class SniperCog(commands.Cog):
             embed.set_image(url=message.attachments[0].url)
             embed.add_field(name="Attachments", value=f"{len(message.attachments)} file(s) attached")
 
+        # If the user deleted their own message, shout it out in the channel
         if deleter.id == message.author.id:
             await message.channel.send(content=f"**{message.author.mention} deletin messages**", embed=embed)
 
         logs = self.bot.get_channel(log_channel)
         if logs:
             embed.add_field(name="Channel", value=message.channel.mention, inline=False)
+            await logs.send(embed=embed)
+
+    @commands.Cog.listener()
+    async def on_message_edit(self, before, after):
+        # Basic checks: same guild logic, ignore bots, ignore if no content change
+        if not isAllowedInGuild(self, after.guild.id) or after.author.bot or after.guild is None:
+            return
+
+        if before.content == after.content:
+            return
+
+        embed = discord.Embed(
+            title="bro editing",
+            color=0x47a0ff,
+            timestamp=discord.utils.utcnow(),
+            url=after.jump_url # Link to the message
+        )
+
+        embed.set_author(
+            name=f"{after.author.display_name} ({after.author.id})",
+            icon_url=after.author.display_avatar.url
+        )
+
+        # Truncate content if it's too long (Discord embeds have limits)
+        old_content = (before.content[:1021] + '...') if len(before.content) > 1024 else before.content
+        new_content = (after.content[:1021] + '...') if len(after.content) > 1024 else after.content
+
+        embed.add_field(name="Before", value=old_content or "*[No text]*", inline=False)
+        embed.add_field(name="After", value=new_content or "*[No text]*", inline=False)
+        embed.add_field(name="Channel", value=after.channel.mention, inline=False)
+
+        logs = self.bot.get_channel(log_channel)
+        if logs:
             await logs.send(embed=embed)
 
 
