@@ -43,9 +43,9 @@ class NewsCog(commands.Cog):
         embed.timestamp = ctx.message.created_at
 
         # 3. Send and give feedback
-        await target_channel.send(embed=embed)
+        post = await target_channel.send(embed=embed)
         for emoji in reactions:
-            await ctx.message.add_reaction(emoji)
+            await post.add_reaction(emoji)
 
 async def setup(bot):
     await bot.add_cog(NewsCog(bot))
