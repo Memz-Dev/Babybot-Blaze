@@ -37,6 +37,11 @@ class NewsCog(commands.Cog):
             description=body,
             color=0x4f90f7,
         )
+
+        if ctx.message.attachments:
+            # Grab the first attachment and set it as the embed image
+            attachment_url = ctx.message.attachments[0].url
+            embed.set_image(url=attachment_url)
         
         # Adding a timestamp and footer for a more "official" look
         embed.set_footer(text=f"Reported by {ctx.author.display_name}")
