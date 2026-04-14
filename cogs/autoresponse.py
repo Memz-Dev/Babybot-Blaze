@@ -60,7 +60,7 @@ class ResponseCog(commands.Cog):
             role = message.guild.get_role(slopperRole)
             await message.author.add_roles(role)
             add_to_list(message.author.id)
-
+            await announce_slopped_member(self.bot,message.author,"Posted in auto-slop.")
             await message.delete()
 
             return
