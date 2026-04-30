@@ -30,7 +30,7 @@ class MessAroundCog(commands.Cog):
 
     @commands.command()
     async def ban(ctx, member: discord.Member, *, reason="No reason provided."):
-        if not author_is_owner(ctx):
+        if not await author_is_owner(ctx):
             return
         embed = discord.Embed(
             title="User Banned",
