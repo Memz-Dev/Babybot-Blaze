@@ -48,8 +48,7 @@ class ResponseCog(commands.Cog):
         
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
-        if not isAllowedInGuild(self,message.guild.id): 
-            return
+        
         
         # ignore messages from bots
         if message.author.bot:
@@ -66,6 +65,9 @@ class ResponseCog(commands.Cog):
             return
         
         if isinstance(message.channel, discord.DMChannel):
+            if not message.author.id == owner_id:
+                return
+
             await message.reply("i receive in dms bru")
             # 3. Check for the "Forwarded" flag
             # The 'forwarded' attribute is available in newer versions of discord.py
@@ -80,6 +82,9 @@ class ResponseCog(commands.Cog):
                     original_content = message.snapshots[0].content
                     await message.channel.send(f"The original message said: '{original_content}'")
                     return
+
+        if not isAllowedInGuild(self,message.guild.id): 
+            return
 
         # lowercase content for case-insensitive matching
         msg_content = message.content.lower()
