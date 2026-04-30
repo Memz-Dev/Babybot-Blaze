@@ -29,10 +29,9 @@ class MessAroundCog(commands.Cog):
             await ctx.send("i fumble uhghhh")
 
     @commands.command()
-    async def ban(ctx, member: discord.Member, *, reason="No reason provided."):
+    async def ban(self,ctx, member: discord.Member, *, reason="No reason provided."):
         if not await author_is_owner(ctx):
             return
-        await ctx.send("balls")
         embed = discord.Embed(
             title="User Banned",
             description=f"**{member.name}** has been banned for: {reason}.",
