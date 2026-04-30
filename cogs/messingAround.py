@@ -34,7 +34,7 @@ class MessAroundCog(commands.Cog):
             return
         embed = discord.Embed(
             title="User Banned",
-            description=f"**{member.name}** has been banned for: {reason}.",
+            description=f"**{member.name}** has been banned for: '{reason}'.",
             color=0xff0000
         )
         await ctx.send(embed=embed)
