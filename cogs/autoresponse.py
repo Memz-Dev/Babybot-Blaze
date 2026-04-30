@@ -64,6 +64,22 @@ class ResponseCog(commands.Cog):
             await message.delete()
 
             return
+        
+        if isinstance(message.channel, discord.DMChannel):
+            
+            # 3. Check for the "Forwarded" flag
+            # The 'forwarded' attribute is available in newer versions of discord.py
+            # Otherwise, we check the 'flags' attribute for 'has_snapshot'
+            if message.flags.has_snapshot:
+                # The bot "sees" the forward!
+                await message.reply("I see you forwarded a message to me! Analyzing the contents...")
+                
+                # Accessing the forwarded content (the Snapshot)
+                # Note: message.snapshots is a list of the forwarded messages
+                if message.snapshots:
+                    original_content = message.snapshots[0].content
+                    await message.channel.send(f"The original message said: '{original_content}'")
+                    return
 
         # lowercase content for case-insensitive matching
         msg_content = message.content.lower()
