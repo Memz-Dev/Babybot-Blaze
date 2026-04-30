@@ -66,7 +66,7 @@ class ResponseCog(commands.Cog):
             return
         
         if isinstance(message.channel, discord.DMChannel):
-            
+            await message.reply("i receive in dms bru")
             # 3. Check for the "Forwarded" flag
             # The 'forwarded' attribute is available in newer versions of discord.py
             # Otherwise, we check the 'flags' attribute for 'has_snapshot'
