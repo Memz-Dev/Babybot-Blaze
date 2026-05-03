@@ -133,7 +133,8 @@ class SlopCog(commands.Cog):
             return await ctx.send("where msg retard")
         
         timePassed = time.time() - self.purgatoryTimestamp
-        if (timePassed < self.purgatoryCooldown) or isOwner(ctx.author.id):
+        clause = (timePassed < self.purgatoryCooldown) and not (await author_is_owner(ctx))
+        if clause:
             return await ctx.send(f"be patient bitch - {round(self.purgatoryCooldown - timePassed)} seconds")
 
         self.purgatoryTimestamp = time.time()
