@@ -14,6 +14,7 @@ class ResponseCog(commands.Cog):
                 "kazuya": "sigma",
                 "asuka": "stupid bitch character",
                 "crashout": "shut mouth",
+                "welcome":"https://media.discordapp.net/attachments/1347246965670416546/1493206651514257408/2vr1jrx.png?ex=69de2090&is=69dccf10&hm=3a2e339b2629727f5ae82b84ec911f5a616a38e41cdd68b990eee7c07df50bb1&=&format=webp&quality=lossless&width=372&height=436",
                 "rofighters": "26 years",
                 "anna" : "honest low tier",
                 "latinx" : "<@852600131932651551>",
@@ -47,8 +48,7 @@ class ResponseCog(commands.Cog):
         
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
-        if not isAllowedInGuild(self,message.guild.id): 
-            return
+        
         
         # ignore messages from bots
         if message.author.bot:
@@ -59,9 +59,23 @@ class ResponseCog(commands.Cog):
             role = message.guild.get_role(slopperRole)
             await message.author.add_roles(role)
             add_to_list(message.author.id)
-
+            await announce_slopped_member(self.bot,message.author,"Posted in auto-slop.")
             await message.delete()
 
+            return
+        
+        if isinstance(message.channel, discord.DMChannel):
+            if not message.author.id == owner_id:
+                return
+
+            await message.reply("i receive in dms bru")
+            
+            if message.message_snapshots:
+                    original_content = message.message_snapshots[0].content
+                    await message.channel.send(f"The original message said: '{original_content}'")
+                    return
+
+        if not isAllowedInGuild(self,message.guild.id): 
             return
 
         # lowercase content for case-insensitive matching
