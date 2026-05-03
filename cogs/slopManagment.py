@@ -119,6 +119,27 @@ class SlopCog(commands.Cog):
 
         await channel.send(f"{message}\n*- {ctx.author.name}*")
         await ctx.send("vr vr good, message sent")
+
+    @commands.command(aliases=['cpm'])
+    async def custompurgatorymessage(self, ctx,newuser: str = "anon", *, message: str = None):
+        if not isAllowedInGuild(self,ctx.guild.id): 
+            return
+        
+        channel = self.bot.get_channel(1348640981586808882)
+        if channel is None:
+            return
+
+        if not message:
+            return await ctx.send("where msg retard")
+        
+        timePassed = time.time() - self.purgatoryTimestamp
+        if timePassed < self.purgatoryCooldown:
+            return await ctx.send(f"be patient bitch - {round(self.purgatoryCooldown - timePassed)} seconds")
+
+        self.purgatoryTimestamp = time.time()
+
+        await channel.send(f"{message}\n*- {ctx.author.name}*")
+        await ctx.send("vr vr good, message sent")
         
 
 
