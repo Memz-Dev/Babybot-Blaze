@@ -141,6 +141,21 @@ class SlopCog(commands.Cog):
 
         await channel.send(f"{message}\n*- {newuser}*")
         await ctx.send("vr vr good, message sent")
+
+    @commands.command(aliases=['bm'])
+    async def botmessage(self, ctx, *, message: str = None):
+        if not await author_is_owner(ctx): 
+            return
+        
+        channel = self.bot.get_channel(1348640981586808882)
+        if channel is None:
+            return
+
+        if not message:
+            return await ctx.send("where msg retard")
+        
+       
+        await channel.send(f"{message}")
         
 
 
