@@ -51,6 +51,13 @@ class GeneralCog(commands.Cog):
                 )
         embed.add_field(name="Character AI", value=f"{skylarBots.get("character_ai_account").get("user")}\n[Link]({skylarBots.get("character_ai_account").get("link")})", inline=False)
         embed.add_field(name="Janitor AI", value=f"{skylarBots.get("janitor_ai_account").get("user")}\n[Link]({skylarBots.get("janitor_ai_account").get("link")})", inline=False)
+        embed.add_field(name="Tiktok", value=f"{skylarBots.get("tiktok_account").get("user")}\n[Link]({skylarBots.get("tiktok_account").get("link")})", inline=False)
+        embed.add_field(name="DeviantArt", value=f"{skylarBots.get("deviant_art_account").get("user")}\n[Link]({skylarBots.get("deviant_art_account").get("link")})", inline=False)
+        embed.add_field(name="Reddit", value=f"{skylarBots.get("reddit_account").get("user")}\n[Link]({skylarBots.get("reddit_account").get("link")})", inline=False)
+        embed.add_field(name="Twitter", value=f"{skylarBots.get("twitter_account").get("user")}\n[Link]({skylarBots.get("twitter_account").get("link")})", inline=False)
+        embed.add_field(name="Twitch", value=f"{skylarBots.get("twitch_account").get("user")}\n[Link]({skylarBots.get("twitch_account").get("link")})", inline=False)
+        embed.add_field(name="YouTube", value=f"{skylarBots.get("youtube_account").get("user")}\n[Link]({skylarBots.get("youtube_account").get("link")})", inline=False)
+
         await ctx.send(embed=embed)
 
     @commands.command()
