@@ -65,10 +65,10 @@ class ResponseCog(commands.Cog):
             return
         
         if isinstance(message.channel, discord.DMChannel):
-            
+            relay = f"{message.content}\n*- {message.author.name}*"
             
             channel = self.bot.get_channel(dmhist)
-            channel.send(f"{message.content}\n*- {message.author.name}*")
+            await channel.send(relay)
             
             #if message.message_snapshots:
                     #original_content = message.message_snapshots[0].content
