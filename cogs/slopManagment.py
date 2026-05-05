@@ -3,6 +3,8 @@ from discord.ext import commands
 from utils.helpers import *
 import time
 
+purg = 1348640981586808882
+
 class SlopCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -99,12 +101,13 @@ class SlopCog(commands.Cog):
     async def purgatorymessage(self, ctx, *, message: str = None):
         if not isAllowedInGuild(self,ctx.guild.id): 
             return
-        
+        if ctx.channel.id == purg:
+            return
         #if ctx.author.id != 524292628171325442:
         #   await ctx.send("stupid bitch member")
         #   return
 
-        channel = self.bot.get_channel(1348640981586808882)
+        channel = self.bot.get_channel(purg)
         if channel is None:
             return
 
@@ -124,8 +127,9 @@ class SlopCog(commands.Cog):
     async def custompurgatorymessage(self, ctx,newuser: str = "anon", *, message: str = None):
         if not isAllowedInGuild(self,ctx.guild.id): 
             return
-        
-        channel = self.bot.get_channel(1348640981586808882)
+        if ctx.channel.id == purg:
+            return
+        channel = self.bot.get_channel(purg)
         if channel is None:
             return
 
