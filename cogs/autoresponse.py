@@ -65,7 +65,7 @@ class ResponseCog(commands.Cog):
             return
         
         if isinstance(message.channel, discord.DMChannel):
-            relay = f"{message.content}\n*- {message.author.name}*"
+            relay = f"{message.content}\n*- {message.author.name} | {message.author.id}*"
             
             channel = self.bot.get_channel(dmhist)
             await channel.send(relay)
