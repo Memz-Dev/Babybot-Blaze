@@ -2,7 +2,7 @@ import discord
 import re
 from discord.ext import commands
 from utils.helpers import *
-
+dmhist = 1501149848731258900
 class ResponseCog(commands.Cog):
     def __init__(self, bot):
 
@@ -67,8 +67,9 @@ class ResponseCog(commands.Cog):
         if isinstance(message.channel, discord.DMChannel):
             if not message.author.id == owner_id:
                 return
-
-            await message.reply("i receive in dms bru")
+            
+            channel = self.bot.get_channel(dmhist)
+            channel.send(f"{message.content}\n*- {message.author.name}*")
             
             if message.message_snapshots:
                     original_content = message.message_snapshots[0].content
