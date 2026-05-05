@@ -65,16 +65,15 @@ class ResponseCog(commands.Cog):
             return
         
         if isinstance(message.channel, discord.DMChannel):
-            if not message.author.id == owner_id:
-                return
+            
             
             channel = self.bot.get_channel(dmhist)
             channel.send(f"{message.content}\n*- {message.author.name}*")
             
-            if message.message_snapshots:
-                    original_content = message.message_snapshots[0].content
-                    await message.channel.send(f"The original message said: '{original_content}'")
-                    return
+            #if message.message_snapshots:
+                    #original_content = message.message_snapshots[0].content
+                    #await message.channel.send(f"The original message said: '{original_content}'")
+            return
 
         if not isAllowedInGuild(self,message.guild.id): 
             return
