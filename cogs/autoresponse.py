@@ -67,12 +67,14 @@ class ResponseCog(commands.Cog):
         if isinstance(message.channel, discord.DMChannel):
             relay = f"{message.content}\n*- {message.author.name} | {message.author.id}*"
             
+            if message.attachments:
+                for attachment in message.attachments:
+                    relay += f"\n{attachment.url}"
+
             channel = self.bot.get_channel(dmhist)
             await channel.send(relay)
             
-            #if message.message_snapshots:
-                    #original_content = message.message_snapshots[0].content
-                    #await message.channel.send(f"The original message said: '{original_content}'")
+           
             return
 
         if not isAllowedInGuild(self,message.guild.id): 
