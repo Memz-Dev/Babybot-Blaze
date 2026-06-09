@@ -9,7 +9,6 @@ emojis = ['🫃', '💀', '🥀']
 async def slime_message(message):
         for emoji in emojis:
                 try:
-                    # Add the reaction to the target message
                     await message.add_reaction(emoji)
                 except Exception as e:
                     print(f"Error adding reaction {emoji}: {e}")

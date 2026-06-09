@@ -18,12 +18,11 @@ class SniperCog(commands.Cog):
         if not message.content and not message.attachments:
             return
         
-        # Note: Audit logs can be slow; this logic often needs a slight delay or specific handling
         deleter = message.author
         async for entry in message.guild.audit_logs(action=discord.AuditLogAction.message_delete, limit=1):
             if entry.target == message.author and (datetime.datetime.now(datetime.timezone.utc) - entry.created_at).total_seconds() < 5:
                 deleter = entry.user
-                break # Use break instead of return so the code below actually runs
+                break 
 
         embed = discord.Embed(
             title="Message Deleted",
@@ -41,7 +40,6 @@ class SniperCog(commands.Cog):
             embed.set_image(url=message.attachments[0].url)
             embed.add_field(name="Attachments", value=f"{len(message.attachments)} file(s) attached")
 
-        # If the user deleted their own message, shout it out in the channel
         if deleter.id == message.author.id:
             await message.channel.send(content=f"**{message.author.mention} deletin messages**", embed=embed)
 
@@ -52,7 +50,6 @@ class SniperCog(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message_edit(self, before, after):
-        # Basic checks: same guild logic, ignore bots, ignore if no content change
         if not isAllowedInGuild(self, after.guild.id) or after.author.bot or after.guild is None:
             return
 
@@ -63,7 +60,7 @@ class SniperCog(commands.Cog):
             title="bro editing",
             color=0x47a0ff,
             timestamp=discord.utils.utcnow(),
-            url=after.jump_url # Link to the message
+            url=after.jump_url 
         )
 
         embed.set_author(
@@ -71,7 +68,6 @@ class SniperCog(commands.Cog):
             icon_url=after.author.display_avatar.url
         )
 
-        # Truncate content if it's too long (Discord embeds have limits)
         old_content = (before.content[:1021] + '...') if len(before.content) > 1024 else before.content
         new_content = (after.content[:1021] + '...') if len(after.content) > 1024 else after.content
 

@@ -80,7 +80,6 @@ class ResponseCog(commands.Cog):
         if not isAllowedInGuild(self,message.guild.id): 
             return
 
-        # lowercase content for case-insensitive matching
         msg_content = message.content.lower()
 
         for phrase, reply in self.responses.items():

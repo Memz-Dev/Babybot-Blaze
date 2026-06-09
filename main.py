@@ -15,7 +15,6 @@ intents.dm_messages = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 async def main():
-    # await load_extension because load_extension is coroutine in modern discord.py
     await bot.load_extension("cogs.slopManagment")
     await bot.load_extension("cogs.miinews")
     await bot.load_extension("cogs.general")

@@ -91,7 +91,7 @@ class StatusCog(commands.Cog):
 
         @bot.command()
         async def updateproto(ctx):
-            if ctx.author.id != Sigma_ID:
+            if ctx.author.id != owner_id:
                 await ctx.send("stupid bitch member")
                 return
             

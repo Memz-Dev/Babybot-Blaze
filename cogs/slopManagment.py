@@ -62,7 +62,6 @@ class SlopCog(commands.Cog):
         if not isAllowedInGuild(self,member.guild.id): 
             return
 
-        # check if this member was previously given the slop role
         if member.id in stored_members:
             role = member.guild.get_role(slopperRole)
             if role:
@@ -77,7 +76,7 @@ class SlopCog(commands.Cog):
         if not isAllowedInGuild(self, ctx.guild.id):
             return
         
-        ids = get_list()  # list of user IDs
+        ids = get_list()  
 
         names = []
         for uid in ids:
@@ -103,9 +102,6 @@ class SlopCog(commands.Cog):
             return
         if ctx.channel.id == purg:
             return
-        #if ctx.author.id != 524292628171325442:
-        #   await ctx.send("stupid bitch member")
-        #   return
 
         channel = self.bot.get_channel(purg)
         if channel is None:
