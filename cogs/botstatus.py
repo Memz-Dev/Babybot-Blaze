@@ -115,7 +115,7 @@ class StatusCog(commands.Cog):
             output = subprocess.getoutput(f"sudo /home/memz/Proto/update_bot.sh")
             embed = discord.Embed(
                 title="Update complete!",
-                description=f"New version: `idfk`\nRestarting...",
+                description=f"{output}",
                 color=0x00FF00
             )
             await ctx.send(embed=embed)
