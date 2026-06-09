@@ -104,6 +104,21 @@ class StatusCog(commands.Cog):
             )
             await ctx.send(embed=embed)
             restartOutput = subprocess.getoutput(RESTART_SCRIPT)
+
+        @bot.command()
+        async def updateproto(ctx):
+            if ctx.author.id != Sigma_ID:
+                await ctx.send("stupid bitch member")
+                return
+            
+            
+            output = subprocess.getoutput(f"sudo /home/memz/Proto/update_bot.sh")
+            embed = discord.Embed(
+                title="Update complete!",
+                description=f"New version: `idfk`\nRestarting...",
+                color=0x00FF00
+            )
+            await ctx.send(embed=embed)
             
                 
             
