@@ -99,7 +99,7 @@ class StatusCog(commands.Cog):
             output = subprocess.getoutput(UPDATE_SCRIPT)
             embed = discord.Embed(
                 title="Update complete!",
-                description=f"New version: `{remote}`\nRestarting...",
+                description=f"New version: `{remote}`\n{output}",
                 color=0x00FF00
             )
             await ctx.send(embed=embed)
