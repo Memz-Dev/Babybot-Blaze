@@ -11,6 +11,12 @@ auto_slop_channel = 1348640858169282614
 logs = 1348644498904977479
 owner_id = 524292628171325442
 
+REPO_API = "https://api.github.com/repos/memz-dev/babybot-blaze/branches/main"
+BOT_PATH = "/home/memz/Babybot-Blaze"
+UPDATE_SCRIPT = f"sudo {BOT_PATH}/update_bot.sh"
+RESTART_SCRIPT = f"sudo {BOT_PATH}/restart.sh"
+VERSION_FILE = f"{BOT_PATH}/.version"
+
 DATA_FILE = "members.json"
 MUSIC_FILE = "music.json"
 SKYLAR_FILE = "skylarfiles.json"
@@ -18,6 +24,7 @@ SKYLAR_BOTS = "skylarbots.json"
 
 NO_PERMISSIONS = "stupid bitch admin give perms"
 ERROR_MESSAGE = "stupid error msg"
+
 # ----- Persistent storage -----
 if os.path.exists(SKYLAR_FILE):
     with open(SKYLAR_FILE, "r") as f:
@@ -43,6 +50,20 @@ if os.path.exists(MUSIC_FILE):
 else:
     musicData = {}
 
+
+# ------- Version fetching --------
+def get_local_version():
+    with open(".version") as f:
+        version = f.read().strip()
+    return version
+    
+def get_remote_version():
+    resp = requests.get(REPO_API)
+    resp.raise_for_status()
+    data = resp.json()
+    return data["commit"]["sha"][:7]
+# ---------------------------------
+
 def setAllowedGuilds(cog,listOfGuilds):
       cog.allowList = listOfGuilds
 
@@ -50,13 +71,11 @@ def isAllowedInGuild(cog,serverID):
       return serverID in cog.allowList
 
 def save_data():
-    """Save the stored_members list to JSON file"""
     with open(DATA_FILE, "w") as f:
         json.dump(stored_members, f, indent=4)
 
 # ----- Permissions -----
 def has_manage_roles(ctx):
-    """Check if the command author can manage roles"""
     return ctx.author.guild_permissions.manage_roles
 
 async def author_is_owner(ctx):
@@ -66,8 +85,7 @@ async def author_is_owner(ctx):
       return True
 
 async def quick_check_roleEdit(ctx):
-    """Check if the command author can manage roles"""
-    
+
     if not has_manage_roles(ctx):
         await ctx.send("shut up bitch member")
         return False
@@ -98,8 +116,8 @@ def get_list():
     
 def add_to_list(id):
      if id not in stored_members:
-                stored_members.append(id)
-                save_data()
+            stored_members.append(id)
+            save_data()
 
 def remove_from_list(id):
      if id in stored_members:
@@ -150,28 +168,5 @@ async def unslop_member(ctx,member):
 def isOwner(memberID):
       return memberID == 524292628171325442
 
-def get_release(id):
-    url = f"https://api.discogs.com/releases/{id}"
-    headers = {
-        #"Authorization": f"Discogs token={DISCOGS_TOKEN}",
-        "User-Agent": "BabyBotBlaze/1.0"
-    }
-    resp = requests.get(url, headers=headers)
-    if resp.status_code != 200:
-        return f"Error fetching release: {resp.status_code}"
-    return resp.json()
 
-
-# It's best to use a single session for the bot, but here's the logic:
-async def get_release_async(id):
-    url = f"https://api.discogs.com/releases/{id}"
-    headers = {
-        "User-Agent": "BabyBotBlaze/1.0"
-    }
-    
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url, headers=headers) as resp:
-            if resp.status != 200:
-                return f"Error fetching release: {resp.status}"
-            return await resp.json()
     

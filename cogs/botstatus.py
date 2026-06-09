@@ -4,26 +4,10 @@ from discord.ext import commands
 from utils.helpers import *
 import subprocess
 
-Sigma_ID = 524292628171325442
-REPO_API = "https://api.github.com/repos/memz-dev/babybot-blaze/branches/main"
 
 version = "-"
 
-def get_local_version():
-    with open(".version") as f:
-        version = f.read().strip()
-    return version
-    
-BOT_PATH = "/home/memz/Babybot-Blaze"
-UPDATE_SCRIPT = f"sudo {BOT_PATH}/update_bot.sh"
-RESTART_SCRIPT = f"sudo {BOT_PATH}/restart.sh"
-VERSION_FILE = f"{BOT_PATH}/.version"
 
-def get_remote_version():
-    resp = requests.get(REPO_API)
-    resp.raise_for_status()
-    data = resp.json()
-    return data["commit"]["sha"][:7]  # short hash
 
 class StatusCog(commands.Cog):
     def __init__(self, bot):
@@ -36,7 +20,7 @@ class StatusCog(commands.Cog):
 
         @bot.command()
         async def version(ctx):
-            if ctx.author.id != Sigma_ID:
+            if ctx.author.id != owner_id:
                 await ctx.send("stupid bitch member")
                 return
 

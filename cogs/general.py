@@ -27,21 +27,6 @@ class GeneralCog(commands.Cog):
         await ctx.send("!slopmeplease\n!album\n!trello")
 
     @commands.command()
-    async def album(self, ctx):
-        
-        result = await get_release_async(get_music_id())
-        
-        embed = discord.Embed(
-                    title=f"Current Album: {result['artists'][0]['name']} - {result['title']}",
-                    description=f"Year: {result['year']}\nGenre: {', '.join(result['genres'])}\nStyles: {', '.join(result['styles'])}",
-                    color=0x00FF00
-                )
-        embed.set_thumbnail(url=result['images'][0]['uri'])
-        embed.add_field(name="Notes", value=get_music_description(), inline=False)
-        embed.add_field(name="Tracklist", value="\n".join([f"{track['position']}. {track['title']} ({track['duration']})" for track in result['tracklist']]), inline=False)
-        await ctx.send(embed=embed)
-
-    @commands.command()
     async def skylaraccounts(self, ctx):
         
         embed = discord.Embed(
@@ -59,14 +44,6 @@ class GeneralCog(commands.Cog):
         embed.add_field(name="YouTube", value=f"{skylarBots.get("youtube_account").get("user")}\n[Link]({skylarBots.get("youtube_account").get("link")})", inline=False)
 
         await ctx.send(embed=embed)
-
-    @commands.command()
-    async def setalbum(self, ctx, releaseID: int, *, description: str = "No description provided"):
-        if not await author_is_owner(ctx):
-            return
-        result = await get_release_async(releaseID)
-        set_music(releaseID, description)
-        await ctx.send(f"Album set to: {result['artists'][0]['name']} - {result['title']}")
 
     @commands.command()
     async def channelOrder(self, ctx):

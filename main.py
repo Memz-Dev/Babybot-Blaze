@@ -14,8 +14,6 @@ intents.dm_messages = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-worhtless_value_to_update = 6
-
 async def main():
     # await load_extension because load_extension is coroutine in modern discord.py
     await bot.load_extension("cogs.slopManagment")
@@ -24,12 +22,10 @@ async def main():
     await bot.load_extension("cogs.autoresponse")
     await bot.load_extension("cogs.botstatus")
     await bot.load_extension("cogs.messingAround")
-    await bot.load_extension("cogs.tiqtaqtoe")
     await bot.load_extension("cogs.messageSniper")
+    await bot.load_extension("cogs.music")
 
-    print("Starting bot")
-    
-    # use start() instead of run()
+
     await bot.start(TOKEN)
 
 asyncio.run(main())
