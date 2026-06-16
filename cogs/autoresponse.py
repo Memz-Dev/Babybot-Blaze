@@ -3,6 +3,8 @@ import re
 from discord.ext import commands
 from utils.helpers import *
 dmhist = 1501149848731258900
+tracking = {}
+
 class ResponseCog(commands.Cog):
     def __init__(self, bot):
 

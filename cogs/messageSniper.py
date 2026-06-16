@@ -5,6 +5,7 @@ from utils.helpers import *
 
 log_channel = 1468248316235219065
 
+
 class SniperCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
