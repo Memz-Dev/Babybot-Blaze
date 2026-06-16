@@ -108,19 +108,27 @@ class GeneralCog(commands.Cog):
         await ctx.send(f"[skylar goon list](https://github.com/Memz-Dev/Babybot-Blaze/blob/main/skylarfiles.json)")
 
     @commands.command(aliases=['pu'])
-    async def purgeuser(self,ctx, member: discord.Member = None):
+    async def purgeuser(self,ctx, member: discord.Member = None,amount = 1):
         if not await author_is_owner(ctx):
             return
         
+        totalPurged = 0
+        
         for channel in ctx.guild.text_channels:
+            deleted = 0
             try:
                 def is_target(msg):
-                    return msg.author.id == member.id
+                    if (msg.author.id == member.id) and deleted<amount:
+                        deleted += 1
+                        totalPurged+=1
+                        return True
+                    else:
+                        return False
 
                 await channel.purge(limit=20, check=is_target)
             except:
                 continue
-
+        await ctx.reply(f"Purged {totalPurged} messages.")
 
 
 async def setup(bot):
