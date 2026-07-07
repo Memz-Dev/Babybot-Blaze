@@ -1,3 +1,4 @@
+import asyncio
 import datetime
 import discord
 from discord.ext import commands
@@ -42,7 +43,9 @@ class SniperCog(commands.Cog):
             embed.add_field(name="Attachments", value=f"{len(message.attachments)} file(s) attached")
 
         if deleter.id == message.author.id:
-            await message.channel.send(content=f"**{message.author.mention} deletin messages**", embed=embed)
+            sentmsg = await message.channel.send(content=f"**{message.author.mention} deletin messages**", embed=embed)
+            await asyncio.sleep(3)
+            await sentmsg.delete()
 
         logs = self.bot.get_channel(log_channel)
         if logs:

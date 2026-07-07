@@ -78,6 +78,9 @@ def save_data():
 def has_manage_roles(ctx):
     return ctx.author.guild_permissions.manage_roles
 
+def has_manage_messages(ctx):
+     return ctx.author.guild_permissions.manage_messages
+
 async def author_is_owner(ctx):
       if ctx.author.id != 524292628171325442:
             await ctx.send("stupid bitch member")

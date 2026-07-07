@@ -61,8 +61,7 @@ class GeneralCog(commands.Cog):
 
     @commands.command()
     async def purge(self, ctx, amount: int):
-        if not (await ctx.author.guild_permissions.manage_messages or ctx.author.id == 524292628171325442):
-            await ctx.reply("shut up bitch member")
+        if not await has_manage_messages(ctx):
             return
 
         await ctx.channel.purge(limit=amount + 1)
@@ -109,7 +108,7 @@ class GeneralCog(commands.Cog):
 
     @commands.command(aliases=['pu'])
     async def purgeuser(self, ctx, member: discord.Member = None, amount: int = 1):
-        if not await author_is_owner(ctx):
+        if not await has_manage_messages(ctx):
             return
         
         if not member:
