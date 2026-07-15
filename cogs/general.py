@@ -61,7 +61,7 @@ class GeneralCog(commands.Cog):
 
     @commands.command()
     async def purge(self, ctx, amount: int):
-        if not await has_manage_messages(ctx):
+        if not has_manage_messages(ctx):
             return
 
         await ctx.channel.purge(limit=amount + 1)
@@ -108,9 +108,8 @@ class GeneralCog(commands.Cog):
 
     @commands.command(aliases=['pu'])
     async def purgeuser(self, ctx, member: discord.Member = None, amount: int = 1):
-        await ctx.send("Test")
 
-        if not await has_manage_messages(ctx):
+        if not has_manage_messages(ctx):
             return await ctx.send("stfu stupid bitch member")
         
         if not member:
