@@ -109,7 +109,7 @@ class GeneralCog(commands.Cog):
     @commands.command(aliases=['pu'])
     async def purgeuser(self, ctx, member: discord.Member = None, amount: int = 1):
         if not await has_manage_messages(ctx):
-            return
+            return await ctx.send("stfu stupid bitch member")
         
         if not member:
             return await ctx.send("no member dumbahh")
