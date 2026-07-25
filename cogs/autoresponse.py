@@ -15,6 +15,7 @@ class ResponseCog(commands.Cog):
         self.responses = {
                 "kazuya": "sigma",
                 "asuka": "stupid bitch character",
+                "sorry": "do the thug shaker to prove you're sorry",
                 "crashout": "shut mouth",
                 "welcome":"https://media.discordapp.net/attachments/1347246965670416546/1493206651514257408/2vr1jrx.png?ex=69de2090&is=69dccf10&hm=3a2e339b2629727f5ae82b84ec911f5a616a38e41cdd68b990eee7c07df50bb1&=&format=webp&quality=lossless&width=372&height=436",
                 "rofighters": "26 years",
