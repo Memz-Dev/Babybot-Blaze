@@ -47,7 +47,45 @@ class ResponseCog(commands.Cog):
                 "connection" : "https://tenor.com/view/patrick-crank-dat-gif-19328104",
                 "desync" : "https://media.discordapp.net/attachments/1205017287111872544/1297959047558856765/speed.gif?ex=6917580f&is=6916068f&hm=1bd3bef536e7684ef7d722f76e485f2630bf847378a0961da105f208b7cf5b57&",
             }
-        
+
+    async def _purge_user_messages(self, guild: discord.Guild, member: discord.Member, amount: int = 1) -> int:
+        total_purged = 0
+
+        for channel in guild.text_channels:
+            deleted_in_channel = 0
+
+            def is_target(msg):
+                nonlocal deleted_in_channel, total_purged
+                if deleted_in_channel >= amount:
+                    return False
+                if msg.author.id == member.id:
+                    deleted_in_channel += 1
+                    total_purged += 1
+                    return True
+                return False
+
+            try:
+                await channel.purge(limit=100, check=is_target)
+            except (discord.Forbidden, discord.HTTPException):
+                continue
+
+        return total_purged
+    
+    @commands.command(aliases=['pu'])
+    async def purgeuser(self, ctx, member: discord.Member = None, amount: int = 1):
+
+        if not has_manage_messages(ctx):
+            return await ctx.send("stfu stupid bitch member")
+
+        if not member:
+            return await ctx.send("no member dumbahh")
+
+        status_msg = await ctx.send("Purging... please wait.")
+
+        # Call the helper method
+        total = await self._purge_user_messages(ctx.guild, member, amount)
+
+        await status_msg.edit(content=f"Purged {total} messages.")
         
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
@@ -63,6 +101,7 @@ class ResponseCog(commands.Cog):
             await message.author.add_roles(role)
             add_to_list(message.author.id)
             await announce_slopped_member(self.bot,message.author,"Posted in auto-slop.")
+            await self._purge_user_messages(message.guild, message.author, amount=1)
             await message.delete()
 
             return

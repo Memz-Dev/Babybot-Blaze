@@ -106,41 +106,7 @@ class GeneralCog(commands.Cog):
     async def goonlist(self,ctx):
         await ctx.send(f"[skylar goon list](https://github.com/Memz-Dev/Babybot-Blaze/blob/main/skylarfiles.json)")
 
-    @commands.command(aliases=['pu'])
-    async def purgeuser(self, ctx, member: discord.Member = None, amount: int = 1):
-
-        if not has_manage_messages(ctx):
-            return await ctx.send("stfu stupid bitch member")
-        
-        if not member:
-            return await ctx.send("no member dumbahh")
-            
-        status_msg = await ctx.send("Purging... please wait.")
-        total_purged = 0
-        
-        for channel in ctx.guild.text_channels:
-            deleted_in_channel = 0
-            
-            def is_target(msg):
-                nonlocal deleted_in_channel, total_purged
-                if deleted_in_channel >= amount:
-                    return False
-                    
-                if msg.author.id == member.id:
-                    deleted_in_channel += 1
-                    total_purged += 1
-                    return True
-                return False
-
-            try:
-               
-                await channel.purge(limit=100, check=is_target)
-            except discord.Forbidden:
-                continue
-            except discord.HTTPException:
-                continue
-                
-        await status_msg.edit(content=f"Purged {total_purged} messages.")
+    
 
 
 async def setup(bot):
