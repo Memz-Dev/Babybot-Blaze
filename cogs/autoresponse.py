@@ -38,6 +38,8 @@ class ResponseCog(commands.Cog):
                 "sloppy" : "https://tenor.com/view/ltg-low-tier-god-lowtiergod-pizza-hut-your-mom-gif-13525585162005217098",
                 "bryan" : "just sidestep right bro",
                 "jin" : "realest mishima",
+                "difference": "https://cdn.discordapp.com/attachments/1442460712390885518/1560374324312023131/4k3j69h.mp4?ex=6ad27b55&is=6ad129d5&hm=c0ce11f25df9c0ebde1633d2cd31276b41f047821badc28426d00110869edde9&",
+                "differences": "https://cdn.discordapp.com/attachments/1442460712390885518/1560374324312023131/4k3j69h.mp4?ex=6ad27b55&is=6ad129d5&hm=c0ce11f25df9c0ebde1633d2cd31276b41f047821badc28426d00110869edde9&",
                 "randomslop": "https://cdn.discordapp.com/attachments/1207969876237623318/1556768066069733376/t73kz7w.gif?backend=b2&ex=6ac55cbe&is=6ac40b3e&hm=39565c56cbc8f8bc276356c58f287ed3e200aa18e60393a00f874cdb48e52fe8&",
                 "thugshaker" : "https://cdn.discordapp.com/attachments/1347246965670416546/1556706519293239336/protothug.gif?ex=6ac5236c&is=6ac3d1ec&hm=ebd43090c5969274503069680eacb1adf04b810e42a05438d4fefbfc5eb63680&",
                 "unc still got it" : "https://tenor.com/view/unc-still-got-it-gif-6384030002593541773",
