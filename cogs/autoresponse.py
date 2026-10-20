@@ -32,6 +32,7 @@ class ResponseCog(commands.Cog):
                 "release" : "kys",
                 "guilty gear" : "BANNED WORD",
                 "ggst" : "BANNED WORD",
+                "skylarback" : "https://cdn.discordapp.com/attachments/1442460712390885518/1562176206382833736/0mvd8qt.gif?ex=6ad90977&is=6ad7b7f7&hm=efa22c03b8d3179980214d29738df089292971b0834a383487a83dd235cfd06b&",
                 "cuck":"https://tenor.com/view/cuck-cuck-chair-cuck-chair-technique-goated-cuck-chair-techniques-holy-gif-14336416679670959073",
                 "origin" : "Do you believe in the big bang theory or pangrea?",
                 "king" : "Well I guess just try to break his grabs everytime he tries to grab, and if he should ever whiff then get a combo on him",
