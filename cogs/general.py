@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 from utils.helpers import *
 import random
+import socket
 
 emojis = ['🫃', '💀', '🥀']
 
@@ -24,6 +25,30 @@ class GeneralCog(commands.Cog):
             return
         
         await ctx.send("!slopmeplease\n!album\n!trello")
+
+    @commands.command() 
+    async def ip(self, ctx):
+        if await author_is_owner(ctx) == False:
+            return
+
+        try:
+           
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            s.connect(("8.8.8.8", 80))
+            local_ip = s.getsockname()[0]
+            s.close()
+
+            embed = discord.Embed(
+                title="Host IP Address",
+                description=f"The **local IP** of the host is: \n\n`{local_ip}`",
+                color=discord.Color.green()
+            )
+            embed.set_footer(text="Local network IP.")
+            
+            await ctx.send(embed=embed)
+
+        except Exception as e:
+            await ctx.send(f"Could not fetch IP: `{e}`")
 
     @commands.command()
     async def skylaraccounts(self, ctx):
